@@ -99,6 +99,42 @@ func experimentWithReaderAndWriter() {
 	os.Stdout.Write([]byte{97, 98})
 }
 
+func writeFileOperations() {
+	// create a reader
+	reader := bufio.NewReader(os.Stdin)
+	// create a emtpy slice of byte to store data
+	// to be written to file
+	data := make([]byte, 0, 100)
+	fmt.Println("Enter data to be written to file")
+	stringData, consoleReadStringErr := reader.ReadString('\n')
+	if consoleReadStringErr != nil {
+		fmt.Println("Error while reading data from console")
+		return
+	}
+	//convert stringData to byte and store in a slice
+	//of byte
+	for _, char := range stringData {
+		data = append(data, byte(char))
+	}
+	// write byte data to file
+	fileWriteErr := os.WriteFile("D:\\Desktop\\test.txt", data, 0777)
+	if fileWriteErr != nil {
+		fmt.Println("Error occured while writing to file")
+		return
+	}
+	fmt.Println("Writing to file was Successfull!!!")
+}
+
+func readFileOperations() {
+	fmt.Println("Attempting to read from file")
+	fileData, fileReadErr := os.ReadFile("D:\\Desktop\\test.txt")
+	if fileReadErr != nil {
+		fmt.Printf("File read operation faced error:\n%s.\nExiting...\n", fileReadErr.Error())
+		return
+	}
+	fmt.Println("The data in the file is: ", string(fileData))
+}
+
 func main() {
 	fmt.Println("Main function started!!!")
 	fmt.Println("Select a Number for a Demo:")
@@ -113,6 +149,8 @@ func main() {
 	fmt.Println("9) Variadic functions")
 	fmt.Println("10) Determine the channel type as taker or giver of value")
 	fmt.Println("11) I/O Operatoins")
+	fmt.Println("12) Write File Operations")
+	fmt.Println("13) Read File Operations")
 	fmt.Println("Enter any other inputs to quit")
 	reader := bufio.NewReader(os.Stdin)
 	input, inputErr := reader.ReadString('\n')
@@ -189,5 +227,11 @@ func main() {
 		// io operations
 		fmt.Println("I/O Operations selected")
 		experimentWithReaderAndWriter()
+	case "12":
+		// write file operations
+		writeFileOperations()
+	case "13":
+		// read file operations
+		readFileOperations()
 	}
 }
