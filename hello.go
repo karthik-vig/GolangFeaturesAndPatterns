@@ -102,22 +102,15 @@ func experimentWithReaderAndWriter() {
 func writeFileOperations() {
 	// create a reader
 	reader := bufio.NewReader(os.Stdin)
-	// create a emtpy slice of byte to store data
-	// to be written to file
-	data := make([]byte, 0, 100)
 	fmt.Println("Enter data to be written to file")
 	stringData, consoleReadStringErr := reader.ReadString('\n')
 	if consoleReadStringErr != nil {
 		fmt.Println("Error while reading data from console")
 		return
 	}
-	//convert stringData to byte and store in a slice
-	//of byte
-	for _, char := range stringData {
-		data = append(data, byte(char))
-	}
 	// write byte data to file
-	fileWriteErr := os.WriteFile("D:\\Desktop\\test.txt", data, 0777)
+	// convert string to a byte slice first
+	fileWriteErr := os.WriteFile("D:\\Desktop\\test.txt", []byte(stringData), 0777)
 	if fileWriteErr != nil {
 		fmt.Println("Error occured while writing to file")
 		return
@@ -133,6 +126,24 @@ func readFileOperations() {
 		return
 	}
 	fmt.Println("The data in the file is: ", string(fileData))
+}
+
+func appendWriteToFile() {
+	file, fileErr := os.OpenFile("D:\\Desktop\\test.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
+	if fileErr != nil {
+		fmt.Println("Error occurred while attempting to open the file")
+		return
+	}
+	defer file.Close()
+	someMsg := "So, this part will be appended to the file..."
+	//var fileData []byte
+	//fileData = append(fileData, []byte(someMsg)...)
+	numberOfBytesWritten, fileWriteErr := file.Write([]byte(someMsg))
+	if fileWriteErr != nil {
+		fmt.Println("Error occurred while appending data to the file: \n", fileWriteErr.Error())
+		return
+	}
+	fmt.Println("The append-write was successful. Number of bytes written: ", numberOfBytesWritten)
 }
 
 func main() {
@@ -151,6 +162,7 @@ func main() {
 	fmt.Println("11) I/O Operatoins")
 	fmt.Println("12) Write File Operations")
 	fmt.Println("13) Read File Operations")
+	fmt.Println("14) Append write to File Operations")
 	fmt.Println("Enter any other inputs to quit")
 	reader := bufio.NewReader(os.Stdin)
 	input, inputErr := reader.ReadString('\n')
@@ -233,5 +245,8 @@ func main() {
 	case "13":
 		// read file operations
 		readFileOperations()
+	case "14":
+		// append write data to file
+		appendWriteToFile()
 	}
 }
