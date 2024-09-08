@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"example/user/helloworld/daisychain"
 	"example/user/helloworld/generators"
+	"example/user/helloworld/generics"
 	"example/user/helloworld/multiplexing"
 	"example/user/helloworld/quitindicator"
 	"example/user/helloworld/syncStepGoroutines"
@@ -163,6 +164,7 @@ func main() {
 	fmt.Println("12) Write File Operations")
 	fmt.Println("13) Read File Operations")
 	fmt.Println("14) Append write to File Operations")
+	fmt.Println("15) Test Generics")
 	fmt.Println("Enter any other inputs to quit")
 	reader := bufio.NewReader(os.Stdin)
 	input, inputErr := reader.ReadString('\n')
@@ -248,5 +250,8 @@ func main() {
 	case "14":
 		// append write data to file
 		appendWriteToFile()
+	case "15":
+		// test generics
+		generics.TestGenerics()
 	}
 }
