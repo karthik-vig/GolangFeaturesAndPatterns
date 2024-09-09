@@ -2,6 +2,8 @@ package generics
 
 import (
 	"fmt"
+
+	"golang.org/x/exp/constraints"
 )
 
 type intTypeAlias int
@@ -40,6 +42,10 @@ func greatFunc[T rune | byte, V []T](val T) {
 	// code here...
 }
 
+func greatFunc2[T constraints.Ordered | constraints.Complex](val []T) {
+	// code here...
+}
+
 func TestGenerics() {
 	structVar1 := GenericStruct[string, intTypeAlias, int32]{someValue: "hello world", someStringVal: "hey there", someValue1: 0}
 	structVar2 := GenericStruct[rune, intTypeAlias, int32]{someValue: 'a', someStringVal: "hey there 2", someValue1: 1}
@@ -49,4 +55,5 @@ func TestGenerics() {
 	structVar1.PrintStructValues()
 	structVar2.PrintStructValues()
 	greatFunc[rune]('a')
+	greatFunc2([]string{"hey", "there"})
 }
