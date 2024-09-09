@@ -42,7 +42,7 @@ func greatFunc[T rune | byte, V []T](val T) {
 	// code here...
 }
 
-func greatFunc2[T constraints.Ordered | constraints.Complex](val []T) {
+func greatFunc2[T constraints.Ordered](val []T) {
 	// code here...
 }
 
