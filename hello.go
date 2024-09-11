@@ -5,9 +5,12 @@ import (
 	"example/user/helloworld/daisychain"
 	"example/user/helloworld/generators"
 	"example/user/helloworld/generics"
+	"example/user/helloworld/iterators"
 	"example/user/helloworld/multiplexing"
 	"example/user/helloworld/quitindicator"
+	slicefunctions "example/user/helloworld/sliceFunctions"
 	"example/user/helloworld/syncStepGoroutines"
+	"example/user/helloworld/testmapfuncs"
 	"example/user/helloworld/timeout"
 	"fmt"
 	"os"
@@ -165,6 +168,9 @@ func main() {
 	fmt.Println("13) Read File Operations")
 	fmt.Println("14) Append write to File Operations")
 	fmt.Println("15) Test Generics")
+	fmt.Println("16) Test Iterators (requires GO v1.23 and above)")
+	fmt.Println("17) Test Slice in-built functions")
+	fmt.Println("18) Test map in-built funcs from standard library")
 	fmt.Println("Enter any other inputs to quit")
 	reader := bufio.NewReader(os.Stdin)
 	input, inputErr := reader.ReadString('\n')
@@ -253,5 +259,14 @@ func main() {
 	case "15":
 		// test generics
 		generics.TestGenerics()
+	case "16":
+		// test iterators; needs GO 1.22 or 1.23 and above
+		iterators.IteratorExample()
+	case "17":
+		// check out in-built slice functions
+		slicefunctions.TestSliceFunctions()
+	case "18":
+		// test in-built map funcs
+		testmapfuncs.TestMapFuncs()
 	}
 }
