@@ -114,7 +114,7 @@ func writeFileOperations() {
 	}
 	// write byte data to file
 	// convert string to a byte slice first
-	fileWriteErr := os.WriteFile("D:\\Desktop\\test.txt", []byte(stringData), 0777)
+	fileWriteErr := os.WriteFile(".\\test.txt", []byte(stringData), 0777)
 	if fileWriteErr != nil {
 		fmt.Println("Error occured while writing to file")
 		return
@@ -124,7 +124,7 @@ func writeFileOperations() {
 
 func readFileOperations() {
 	fmt.Println("Attempting to read from file")
-	fileData, fileReadErr := os.ReadFile("D:\\Desktop\\test.txt")
+	fileData, fileReadErr := os.ReadFile(".\\test.txt")
 	if fileReadErr != nil {
 		fmt.Printf("File read operation faced error:\n%s.\nExiting...\n", fileReadErr.Error())
 		return
@@ -133,7 +133,7 @@ func readFileOperations() {
 }
 
 func appendWriteToFile() {
-	file, fileErr := os.OpenFile("D:\\Desktop\\test.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
+	file, fileErr := os.OpenFile(".\\test.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0777)
 	if fileErr != nil {
 		fmt.Println("Error occurred while attempting to open the file")
 		return
